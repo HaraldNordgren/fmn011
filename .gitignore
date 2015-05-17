@@ -2,3 +2,6 @@ A_matrix/
 nena_color/
 nena_grayscale/
 
+*.odt#
+*~
+*.swp

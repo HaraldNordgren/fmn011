@@ -2,3 +2,7 @@ SVD_compression_rank,Compression_ratio,Relative_error
 1,1.05,0.22
 2,1.02,0.072
 3,1.01,0.026
+4,1.01,0.016
+5,1.01,0.014
+6,1.01,0.0099
+7,1,0.0035
