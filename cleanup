@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function cleandir {
+    cd $1
+    echo $(pwd)
+    rm * >& /dev/null
+    cd ..
+}
+
+cleandir 'A_matrix'
+cleandir 'nena_color'
+cleandir 'nena_grayscale'
+cleandir 'video'
