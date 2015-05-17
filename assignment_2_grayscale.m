@@ -1,4 +1,4 @@
-function [RANKS, size_ratios, errors] = assignment_2_grayscale(nena)
+function [] = assignment_2_grayscale(nena, RANKS)
 
 FOLDER = 'nena_grayscale';
 UNCOMPRESSED_IMAGE_PATH = [FOLDER, ...
@@ -9,8 +9,6 @@ FIGURE_TITLE = 'Nena grayscale, SVD compression';
 SUBPLOT_TITLE_START = 'Rank ';
 SUBPLOT_CAPTION_START = 'Compression';
 SUBPLOT_CAPTION_MIDDLE = 'ratio ';
-
-RANKS = 2 .^ (1:10);
 
 nena_grayscale = double(rgb2gray(nena));
 imwrite(divide_all_by_largest_element(nena_grayscale), UNCOMPRESSED_IMAGE_PATH);
@@ -46,3 +44,4 @@ end
 suptitle(FIGURE_TITLE)
 
 generate_table(FOLDER, RANKS, size_ratios, errors);
+plot_data(RANKS, size_ratios, errors, 'Nena grayscale SVD compression');

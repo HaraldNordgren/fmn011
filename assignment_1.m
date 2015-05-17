@@ -1,5 +1,12 @@
 load A;
 
+%sz = size(A);
+%for i = 1:sz(1)
+%    for j = 1:size(2)
+%        A(i,j) = A(i,j) - 128;
+%    end
+%end
+
 FOLDER = 'A_matrix';
 UNCOMPRESSED_PATH = [FOLDER, '/Uncompressed.jpg'];
 
@@ -8,7 +15,7 @@ FIGURE_TITLE_START = 'Matrix A grayscale,';
 FIGURE_TITLE_MIDDLE = 'SVD compression rank ';
 CAPTION_START = 'Compression ratio ';
 
-RANKS = 1:7;
+RANKS = 1:3;
 
 figure;
 set(gcf, 'Position', [0 0 634 638]);
@@ -41,3 +48,4 @@ for k = RANKS
 end
 
 generate_table(FOLDER, RANKS, size_ratios, errors);
+plot_data(RANKS, size_ratios, errors, 'A matrix SVD compression');
