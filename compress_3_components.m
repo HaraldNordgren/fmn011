@@ -14,7 +14,7 @@ for i = 1:COMPONENTS
     uncompressed_component = uncompressed_image(:,:,i);
     compressed_component = svd_compression(uncompressed_component, rank);
     compressed_image_normalized(:,:,i) = ...
-        normalize_matrix(compressed_component);
+        divide_all_by_largest_element(compressed_component);
     compressed_image(:,:,i) = compressed_component;
     
     error_sum = error_sum + matrix_relative_error( ...
@@ -26,4 +26,4 @@ error_median = error_sum / COMPONENTS;
 file_name = create_image_path(FOLDER, strcat(FILE_NAME, int2str(rank)));
 imwrite(compressed_image_normalized, file_name);
 
-size_ratio = compare_size(uncompressed_size, file_name);
+size_ratio = compression_ratio(uncompressed_size, file_name);

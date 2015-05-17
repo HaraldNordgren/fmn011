@@ -10,10 +10,10 @@ TITLE_START = 'Rank ';
 CAPTION_START = 'Compression';
 CAPTION_MIDDLE = 'ratio ';
 
-RANKS = 2 .^ (7:8);
+RANKS = 2 .^ (0:7);
 
 nena_grayscale = double(rgb2gray(nena));
-imwrite(normalize_matrix(nena_grayscale), UNCOMPRESSED_IMAGE_PATH);
+imwrite(divide_all_by_largest_element(nena_grayscale), UNCOMPRESSED_IMAGE_PATH);
 uncompressed_size = file_size(UNCOMPRESSED_IMAGE_PATH);
 
 %Space allocation
@@ -21,6 +21,9 @@ rank_size = size(RANKS);
 rank_indices = 1:rank_size(2);
 size_ratios = RANKS;
 errors = RANKS;
+
+figure;
+set(gcf, 'Position', [0 0 926 597]);
 
 for k = rank_indices
     RANK_STRING = int2str(RANKS(k));
@@ -32,16 +35,17 @@ for k = rank_indices
         compress_and_create_image( nena_grayscale, ...
         RANKS(k), FILE_NAME, uncompressed_size);
     
-    subplot(1,rank_size(2),k);
+    subplot(2, rank_size(2)/2, k);
     imagesc(compressed_image);
     axis off;
     colormap(gray);
     title(FULL_TITLE);
     
-    FULL_CAPTION = {CAPTION_START, [CAPTION_MIDDLE, num2str(size_ratios(k), 3)]};
-    text(0.15, -0.05, FULL_CAPTION, 'Units', 'normalized')
+    FULL_CAPTION = {CAPTION_START, ...
+        [CAPTION_MIDDLE, num2str(size_ratios(k), 3)]};
+    text(0.2, -0.12, FULL_CAPTION, 'Units', 'normalized')
 end
 
 suptitle(SUPER_TITLE)
 
-nena_grayscale_table = generate_table(RANKS, size_ratios, errors)
+generate_table(FOLDER, RANKS, size_ratios, errors);

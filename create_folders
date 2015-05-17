@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir A_matrix
+mkdir nena_color
+mkdir nena_grayscale
+mkdir video
